@@ -1,0 +1,24 @@
+/* Custom CSS Cyberpunk / Tech Dashboard */
+.stApp {
+    background-color: #0F172A;
+    color: #E2E8F0;
+}
+div[data-testid="stSidebar"] {
+    background-color: #1E293B;
+}
+.metric-card {
+    background-color: #1E293B;
+    border-left: 5px solid #3B82F6;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+.success-card {
+    background-color: #064E3B;
+    border: 1px solid #10B981;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    color: #10B981;
+}
