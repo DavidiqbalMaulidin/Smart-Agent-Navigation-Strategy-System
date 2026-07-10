@@ -4,7 +4,6 @@ import time
 import copy
 from algorithms.bfs import bfs
 from algorithms.astar import astar
-import streamlit.components.v1 as components
 from probability.weather import simulate_weather
 from ml.battery_predictor import predict_energy
 
@@ -64,7 +63,6 @@ if menu == "Dokumentasi State Space":
 
     st.title("Dokumentasi Ruang Keadaan (Sub-CPMK 3.1.1)")
 
-    # Menambahkan huruf r di depan kutip tiga untuk mengaktifkan Raw String (Mencegah SyntaxWarning)
     st.markdown(r"""
 ### 1. Initial State (Keadaan Awal)
 Agen Cerdas atau kurir logistik berada tepat pada titik koordinat awal yaitu **Gudang (Start)**.
@@ -131,7 +129,6 @@ selected_weather = st.selectbox(
     ]
 )
 
-# Menyelaraskan teks seleksi dengan parameter fungsi backend weather
 weather_mapping = {
     "Cerah (Sunny)": "Sunny",
     "Berawan (Cloudy)": "Cloudy",
@@ -177,7 +174,6 @@ st.info(
 # =====================================
 DYNAMIC_GRID = copy.deepcopy(GRID)
 
-# Jika probabilitas kemacetan tinggi akibat cuaca buruk, sistem memicu titik macet tambahan di area tengah
 if weather['blockage_probability'] >= 0.8:
     if DYNAMIC_GRID[4][4] == 0:
         DYNAMIC_GRID[4][4] = 1 
@@ -209,15 +205,15 @@ st.subheader("Simulasi Peta Grid (9x9)")
 
 map_placeholder = st.empty()
 
-# Parameter height diturunkan ke 520 agar pas dan tidak memicu potongan margin bawah iframe
+# st.components.v1.html diganti menjadi st.iframe sesuai standar aturan penulisan terbaru
 if not st.session_state.mission_started:
     grid_html = create_grid_html(DYNAMIC_GRID, START, GOAL, [])
     with map_placeholder.container():
-        components.html(grid_html, height=520, scrolling=False)
+        st.iframe(html=grid_html, height=470, scrolling=False)
 else:
     grid_html = create_grid_html(DYNAMIC_GRID, START, GOAL, astar_result["path"])
     with map_placeholder.container():
-        components.html(grid_html, height=520, scrolling=False)
+        st.iframe(html=grid_html, height=470, scrolling=False)
 
 
 # =====================================
@@ -226,7 +222,8 @@ else:
 
 if not st.session_state.mission_started:
 
-    if st.button("Mulai Navigasi Kurir Cerdas", use_container_width=True):
+    # use_container_width=True diganti menjadi width='stretch'
+    if st.button("Mulai Navigasi Kurir Cerdas", width="stretch"):
 
         current_path = []
 
@@ -235,7 +232,7 @@ if not st.session_state.mission_started:
             html = create_grid_html(DYNAMIC_GRID, START, GOAL, current_path)
 
             with map_placeholder.container():
-                components.html(html, height=520, scrolling=False)
+                st.iframe(html=html, height=470, scrolling=False)
 
             time.sleep(0.15)
 
@@ -268,7 +265,8 @@ if st.session_state.mission_started:
         ]
     })
 
-    st.dataframe(comparison, use_container_width=True)
+    # use_container_width=True diganti menjadi width='stretch'
+    st.dataframe(comparison, width="stretch")
 
 
     # =====================================
