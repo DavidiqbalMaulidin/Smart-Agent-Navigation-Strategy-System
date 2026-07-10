@@ -64,7 +64,8 @@ if menu == "Dokumentasi State Space":
 
     st.title("Dokumentasi Ruang Keadaan (Sub-CPMK 3.1.1)")
 
-    st.markdown("""
+    # Menambahkan huruf r di depan kutip tiga untuk mengaktifkan Raw String (Mencegah SyntaxWarning)
+    st.markdown(r"""
 ### 1. Initial State (Keadaan Awal)
 Agen Cerdas atau kurir logistik berada tepat pada titik koordinat awal yaitu **Gudang (Start)**.
 
@@ -76,7 +77,7 @@ Agen dapat bergerak memilih satu dari empat arah mata angin yang valid di dalam 
 - **Move Right** (Berpindah satu kolom ke kanan)
 
 ### 3. Transition Model (Model Transisi)
-Agen berpindah dari posisi koordinat saat ini $(x, y)$ ke sel tetangga terdekat $(x \pm 1, y)$ atau $(x, y \pm 1)$ pada matriks berukuran $9\\times9$. Syarat utama transisi adalah sel tujuan tidak boleh berupa area rintangan macet (Obstacles).
+Agen berpindah dari posisi koordinat saat ini $(x, y)$ ke sel tetangga terdekat $(x \pm 1, y)$ atau $(x, y \pm 1)$ pada matriks berukuran $9\times9$. Syarat utama transisi adalah sel tujuan tidak boleh berupa area rintangan macet (Obstacles).
 
 ### 4. Goal Test (Uji Titik Tujuan)
 Evaluasi logika untuk memastikan apakah misi pengantaran selesai. Kondisi bernilai benar jika titik koordinat posisi terkini agen sama dengan koordinat lokasi **Konsumen (Goal)**.
